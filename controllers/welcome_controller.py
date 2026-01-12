@@ -1,5 +1,6 @@
 from models.login_state import LoginState
 from controllers.login_controller import LoginController
+from utils.input_controller import get_valid_input
 
 
 class WelcomeController:
@@ -14,8 +15,8 @@ class WelcomeController:
             LoginState
         """
         if choice == 1:
-            username = input("Enter username: ")
-            password = input("Enter password: ")
+            username = get_valid_input("Enter username: ", 1)
+            password = get_valid_input("Enter password: ", 1)
             return self.login_ctrl.verify_login(username, password)
         elif choice == 0:
             return LoginState.EXIT

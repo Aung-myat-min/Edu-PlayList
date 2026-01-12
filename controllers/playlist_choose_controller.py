@@ -1,5 +1,6 @@
 from utils.console_utils import print_success, print_warning, print_info
 from controllers.playlist_display_controller import display_playlist_overview
+from utils.input_controller import get_valid_input
 
 
 def choose_playlist(playlists):
@@ -18,7 +19,7 @@ def choose_playlist(playlists):
         display_playlist_overview(playlists)
         print_info("Enter playlist ID to select, or 'e' to exit")
 
-        user_input = input("Playlist ID (or e): ").strip()
+        user_input = get_valid_input("Playlist ID (or e): ", 6)
 
         # Exit condition
         if user_input.lower() == "e":

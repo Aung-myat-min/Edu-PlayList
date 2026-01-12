@@ -2,6 +2,7 @@ from controllers.playlist_controller import list_playlists, create_playlist, del
     sort_playlists_desc, show_duplicates, export_playlists, choose_a_playlist
 from controllers.welcome_controller import WelcomeController
 from models.program_meta_model import ProgramMeta
+from playlist_inner_menu import playlist_inner_loop
 from utils.console_utils import print_error, print_warning
 from utils.menu_wrapper import run_menu
 from views.playlist_menu_view import PLAYLIST_MENU
@@ -71,11 +72,24 @@ def main():
                 list_playlists(playlists)
 
             case 2:
-                chosen_playlist = choose_a_playlist(playlists)
+                chosen_playlist_id = choose_a_playlist(playlists)
+                if chosen_playlist_id:
+                    chosen_playlist = program_state.get_playlist(chosen_playlist_id)
+                    if chosen_playlist:
+                        playlist_inner_loop(chosen_playlist, program_state)
+                        save_program_state(program_state)
+                    else:
+                        print_error("Playlist not found!")
 
             case 3:
-                create_playlist(playlists, program_state.next_playlist_id())
-                save_program_state(program_state)
+                try:
+                    # Use a temporary ID to not increment the state if creation fails
+                    next_id = program_state.next_playlist_id()
+                    create_playlist(playlists, next_id)
+                    save_program_state(program_state)
+                except ValueError as e:
+                    program_state.latest_playlist_id -= 1
+                    print_error(f"Could not create playlist: {e}")
 
             case 4:
                 delete_playlist(playlists)
@@ -99,4 +113,9 @@ def main():
                 break
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\n⚠️ Program interrupted. Saving state and exiting...")
+    except Exception as e:
+        print(f"❌ Critical Error: {e}")

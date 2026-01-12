@@ -1,5 +1,7 @@
 from utils.number_emoji import NUMBER_EMOJI
 from utils.console_utils import print_section, print_warning, print_info
+from utils.string_utils import clean_input
+
 
 def run_menu(menu_dict, extra_info=None, default_choice=None):
     """
@@ -33,7 +35,7 @@ def run_menu(menu_dict, extra_info=None, default_choice=None):
             return default_choice
 
         # Get user input
-        choice = input("Choose an option: ")
+        choice = clean_input(input("Choose an option: "))
 
         # Validate input is a number
         if not choice.isdigit():

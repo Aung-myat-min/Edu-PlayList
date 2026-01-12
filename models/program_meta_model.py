@@ -36,6 +36,14 @@ class ProgramMeta:
         """Return a copy of the playlists list."""
         return self.playlists.copy()
 
+    def delete_playlist(self, playlist_id):
+        """Remove a playlist by ID and return True if successful."""
+        for i, pl in enumerate(self.playlists):
+            if pl.playlist_id == playlist_id:
+                del self.playlists[i]
+                return True
+        return False
+
     # ---------------- Serialisation ----------------
     def to_dict(self):
         """Convert entire program state to dictionary."""
