@@ -1,6 +1,5 @@
 import re
 
-
 class Singer:
     """Represents a singer."""
 
@@ -19,3 +18,11 @@ class Singer:
 
         self.singer_id = singer_id
         self.singer_name = singer_name
+
+    def __repr__(self):
+        """Return a developer-friendly representation."""
+        return f"{self.__class__.__name__}(singer_id='{self.singer_id}', singer_name='{self.singer_name}')"
+
+    def __str__(self):
+        """Return a clean, labeled string for console output."""
+        return f"SingerId: {self.singer_id},\nName: {self.singer_name}"

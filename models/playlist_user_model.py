@@ -31,6 +31,12 @@ class PlayListUser:
         self._user_id = user_id
         self._password = password
 
+    def __repr__(self):
+        """
+        Return a developer-friendly string representation.
+        """
+        return f"{self.__class__.__name__}(user_id='{self._user_id}', password='{self._password}')"
+
     @property
     def user_id(self):
         """

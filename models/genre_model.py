@@ -1,6 +1,5 @@
 import re
 
-
 class Genre:
     """Represents a music genre."""
 
@@ -19,3 +18,11 @@ class Genre:
 
         self.genre_id = genre_id
         self.genre_name = genre_name
+
+    def __repr__(self):
+        """Return a developer-friendly representation."""
+        return f"{self.__class__.__name__}(genre_id='{self.genre_id}', genre_name='{self.genre_name}')"
+
+    def __str__(self):
+        """Return a clean, labeled string for console output."""
+        return f"GenreId: {self.genre_id},\nName: {self.genre_name}"
