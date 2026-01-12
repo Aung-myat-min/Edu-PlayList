@@ -1,17 +1,14 @@
+from models.playlist_model import Playlist
 from settings import SONG_ID_PREFIX, PLAYLIST_ID_PREFIX
 
 
 class ProgramMeta:
     """Manages global program state like latest IDs and playlists and Local caches."""
 
-    latest_song_id = 0
-    latest_playlist_id = 0
-    playlists = []
-
     def __init__(self, latest_song_id=0, latest_playlist_id=0, playlists=None):
         self.latest_song_id = latest_song_id
         self.latest_playlist_id = latest_playlist_id
-        self.playlists = playlists if playlists is not None else []
+        self.playlists = playlists if playlists else []
 
     # ---------- ID generation ----------
     def next_song_id(self):
@@ -39,3 +36,21 @@ class ProgramMeta:
     def list_playlists(self):
         """Return a copy of the playlists list."""
         return self.playlists.copy()
+
+    # ---------------- Serialization ----------------
+    def to_dict(self):
+        """Convert entire program state to dictionary."""
+        return {
+            "latest_song_id": self.latest_song_id,
+            "latest_playlist_id": self.latest_playlist_id,
+            "playlists": [pl.to_dict() for pl in self.playlists]
+        }
+
+    @classmethod
+    def from_dict(cls, data):
+        playlists = [Playlist.from_dict(pl) for pl in data.get("playlists", [])]
+        return cls(
+            latest_song_id=data.get("latest_song_id", 0),
+            latest_playlist_id=data.get("latest_playlist_id", 0),
+            playlists=playlists
+        )

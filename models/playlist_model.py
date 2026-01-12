@@ -1,4 +1,6 @@
 import re
+
+from models.song_model import Song
 from settings import PLAYLIST_ID_PREFIX
 
 
@@ -60,3 +62,24 @@ class Playlist:
                 f"Name: {self.playlist_name}\n"
                 f"Note: {note_str}\n"
                 f"Songs:\n{songs_table}")
+
+    # ---------------- Serialization ----------------
+    def to_dict(self):
+        """Convert object to dictionary for JSON serialization."""
+        return {
+            "playlist_id": self.playlist_id,
+            "playlist_name": self.playlist_name,
+            "playlist_note": self.playlist_note,
+            "added_songs": [song.to_dict() for song in self.added_songs]  # nested
+        }
+
+    @classmethod
+    def from_dict(cls, data):
+        """Create a Playlist object from a dictionary."""
+        songs = [Song.from_dict(s) for s in data.get("added_songs", [])]
+        return cls(
+            playlist_id=data["playlist_id"],
+            playlist_name=data["playlist_name"],
+            playlist_note=data.get("playlist_note"),
+            added_songs=songs
+        )

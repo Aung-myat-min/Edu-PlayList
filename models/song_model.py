@@ -38,3 +38,23 @@ class Song:
         """Return a clean, labeled string for console output."""
         return (f"SongId: {self.song_id},\nName: {self.song_name},\n"
                 f"Singer: {self.singer_name},\nGenre: {self.genre_name}")
+
+    # ---------------- Serialization ----------------
+    def to_dict(self):
+        """Convert object to dictionary for JSON serialization."""
+        return {
+            "song_id": self.song_id,
+            "song_name": self.song_name,
+            "singer_name": self.singer_name,
+            "genre_name": self.genre_name
+        }
+
+    @classmethod
+    def from_dict(cls, data):
+        """Create a Song object from a dictionary."""
+        return cls(
+            song_id=data["song_id"],
+            song_name=data["song_name"],
+            singer_name=data["singer_name"],
+            genre_name=data["genre_name"]
+        )
