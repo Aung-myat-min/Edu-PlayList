@@ -2,6 +2,7 @@ import re
 
 from models.song_model import Song
 from settings import PLAYLIST_ID_PREFIX
+from utils.console_utils import print_table
 
 
 class Playlist:
@@ -47,21 +48,22 @@ class Playlist:
         """Return a clean, labeled string for console output with songs in table format."""
         note_str = self.playlist_note if self.playlist_note else "None"
 
+        print(f"PlaylistId: {self.playlist_id}")
+        print(f"Name: {self.playlist_name}")
+        print(f"Note: {note_str}")
+        print("Songs:")
+
         if not self.added_songs:
-            songs_table = "No songs"
+            from utils.console_utils import print_warning
+            print_warning("No songs in this playlist.")
         else:
-            # Prepare table header
-            songs_table = f"{'ID':<8} {'Name':<25} {'Singer':<20} {'Genre':<15}\n"
-            songs_table += "-" * 70 + "\n"
+            # Convert Song objects to dicts for table
+            table_data = [song.to_dict() for song in self.added_songs]
+            # Only keep relevant fields
+            for song in table_data:
+                song.pop("extra_field_if_any", None)  # optional cleanup
 
-            # Add each song
-            for song in self.added_songs:
-                songs_table += f"{song.song_id:<8} {song.song_name:<25} {song.singer_name:<20} {song.genre_name:<15}\n"
-
-        return (f"PlaylistId: {self.playlist_id}\n"
-                f"Name: {self.playlist_name}\n"
-                f"Note: {note_str}\n"
-                f"Songs:\n{songs_table}")
+            print_table(table_data, headers=["ID", "Name", "Singer", "Genre"])
 
     # ---------------- Serialisation ----------------
     def to_dict(self):
