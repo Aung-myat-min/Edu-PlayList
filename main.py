@@ -10,11 +10,13 @@ def main():
 
     while True:
         extra_info = None
+        default_choice = None
         if login_state == LoginState.FAIL:
             extra_info = f" ❌ Login failed! Tries left: {tries_left}"
+            default_choice = 1
 
         # Show welcome menu and get choice
-        choice = run_menu(WELCOME_MENU, extra_info)
+        choice = run_menu(WELCOME_MENU, extra_info, default_choice)
         login_state = welcome_ctrl.handle_input(choice)
 
         # Handle login result

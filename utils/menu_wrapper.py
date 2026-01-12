@@ -1,8 +1,7 @@
 from utils.number_emoji import NUMBER_EMOJI
 from utils.console_utils import print_section, print_warning, print_info
 
-
-def run_menu(menu_dict, extra_info=None):
+def run_menu(menu_dict, extra_info=None, default_choice=None):
     """
     Displays a menu, validates user input, and returns the selected key.
     Uses console_utils for standardized output.
@@ -10,6 +9,7 @@ def run_menu(menu_dict, extra_info=None):
     Args:
         menu_dict (dict): Menu dictionary with 'title' and 'options'
         extra_info (str, optional): Extra info to display above menu options
+        default_choice (int, optional): If provided, auto-selects this option
 
     Returns:
         int: The selected menu option key
@@ -26,6 +26,11 @@ def run_menu(menu_dict, extra_info=None):
         for opt in menu_dict["options"]:
             emoji_key = NUMBER_EMOJI.get(opt["key"], str(opt["key"]))
             print(f"{emoji_key} {opt['label']}")
+
+        # If default_choice is provided, return it immediately
+        if default_choice is not None:
+            print(f"(Auto-selected: {default_choice})")
+            return default_choice
 
         # Get user input
         choice = input("Choose an option: ")
