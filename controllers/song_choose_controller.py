@@ -30,7 +30,7 @@ def choose_song(songs):
         ))
 
         print_info("Enter song ID to select, or 'e' to exit")
-        user_input = get_valid_input("Song ID (or e): ", 5)
+        user_input = get_valid_input("Song ID (or e): ", 1)
 
         if user_input.lower() == "e":
             print_info("Exited song selection.")

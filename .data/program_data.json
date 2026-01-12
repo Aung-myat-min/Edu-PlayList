@@ -8,10 +8,10 @@
             "playlist_note": "Note for playlist 1",
             "added_songs": [
                 {
-                    "song_id": "S-001",
-                    "song_name": "Sunshine",
-                    "singer_name": "Alice",
-                    "genre_name": "Pop"
+                    "song_id": "S-004",
+                    "song_name": "Happy Times",
+                    "singer_name": "Frank",
+                    "genre_name": "Electronic"
                 },
                 {
                     "song_id": "S-002",
@@ -20,22 +20,22 @@
                     "genre_name": "Jazz"
                 },
                 {
+                    "song_id": "S-005",
+                    "song_name": "Ocean Waves",
+                    "singer_name": "David",
+                    "genre_name": "Classical"
+                },
+                {
                     "song_id": "S-003",
                     "song_name": "Rainy Day",
                     "singer_name": "Eva",
                     "genre_name": "Rock"
                 },
                 {
-                    "song_id": "S-004",
-                    "song_name": "Happy Times",
-                    "singer_name": "Frank",
-                    "genre_name": "Electronic"
-                },
-                {
-                    "song_id": "S-005",
-                    "song_name": "Ocean Waves",
-                    "singer_name": "David",
-                    "genre_name": "Classical"
+                    "song_id": "S-001",
+                    "song_name": "Sunshine",
+                    "singer_name": "Alice",
+                    "genre_name": "Pop"
                 }
             ]
         },
@@ -44,18 +44,6 @@
             "playlist_name": "Playlist2",
             "playlist_note": "Note for playlist 2",
             "added_songs": [
-                {
-                    "song_id": "S-006",
-                    "song_name": "Mountain High",
-                    "singer_name": "Bob",
-                    "genre_name": "Indie"
-                },
-                {
-                    "song_id": "S-007",
-                    "song_name": "Sunshine",
-                    "singer_name": "Eva",
-                    "genre_name": "Pop"
-                },
                 {
                     "song_id": "S-008",
                     "song_name": "Happy Times",
@@ -67,6 +55,18 @@
                     "song_name": "Rainy Day",
                     "singer_name": "David",
                     "genre_name": "Jazz"
+                },
+                {
+                    "song_id": "S-006",
+                    "song_name": "Mountain High",
+                    "singer_name": "Bob",
+                    "genre_name": "Indie"
+                },
+                {
+                    "song_id": "S-007",
+                    "song_name": "Sunshine",
+                    "singer_name": "Eva",
+                    "genre_name": "Pop"
                 }
             ]
         },

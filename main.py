@@ -1,9 +1,10 @@
+import time
 from controllers.playlist_controller import list_playlists, create_playlist, delete_playlist, sort_playlists_asc, \
     sort_playlists_desc, show_duplicates, export_playlists, choose_a_playlist
 from controllers.welcome_controller import WelcomeController
 from models.program_meta_model import ProgramMeta
 from playlist_inner_menu import playlist_inner_loop
-from utils.console_utils import print_error, print_warning
+from utils.console_utils import print_error, print_warning, print_success, print_info
 from utils.menu_wrapper import run_menu
 from views.playlist_menu_view import PLAYLIST_MENU
 from views.welcome_view import WELCOME_MENU
@@ -39,22 +40,43 @@ def main():
 
     # -------- Login Loop --------
     while True:
+        # Check if locked out before showing menu
+        if welcome_ctrl.login_ctrl.is_locked_out():
+            print_error("🔒 System locked due to too many failed attempts.")
+            try:
+                while welcome_ctrl.login_ctrl.is_locked_out():
+                    remaining = welcome_ctrl.login_ctrl.get_remaining_lockout_time()
+                    mins, secs = divmod(remaining, 60)
+                    # Update text in place without new line
+                    print(f"\r⏳ Please wait {mins:02d}:{secs:02d} before trying again...", end="", flush=True)
+                    time.sleep(0.2)
+            except KeyboardInterrupt:
+                print("\n👋 Exiting program...")
+                return
+            
+            # Clear the countdown line
+            print("\r" + " " * 60 + "\r", end="")
+            print("✅ System unlocked. You may try again.\n")
+            login_state = None # Reset state
+
         extra_info = None
         default_choice = None
 
         if login_state == LoginState.FAIL:
             extra_info = f" ❌ Login failed! Tries left: {tries_left}"
             default_choice = 1
+        
+        # Note: LoginState.LOCKED is handled by the block at the top of the loop
 
         choice = run_menu(WELCOME_MENU, extra_info, default_choice)
         login_state = welcome_ctrl.handle_input(choice)
 
         if login_state == LoginState.SUCCESS:
-            print("🎉 Login successful!\n")
+            print_success("🎉 Login successful!\n")
             break
 
         elif login_state == LoginState.EXIT:
-            print("👋 Exiting program...")
+            print_info("👋 Exiting program...")
             return
 
         tries_left = welcome_ctrl.login_ctrl.attempts_left

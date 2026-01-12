@@ -14,7 +14,7 @@ def list_playlists(playlists):
 def create_playlist(playlists, next_id):
     name = get_valid_input("Playlist name: ")
     note = get_valid_input("Playlist note: ")
-    print(next_id)
+
     playlist = Playlist(
         playlist_id=next_id,
         playlist_name=name,

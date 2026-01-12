@@ -6,6 +6,7 @@ PLAYLIST_INNER_MENU = {
         {"key": 3, "label": "Edit a song"},
         {"key": 4, "label": "Delete a song"},
         {"key": 5, "label": "Shuffle songs"},
+        {"key": 6, "label": "Sort songs (A → Z)"},
         {"key": 0, "label": "Back"}
     ]
 }

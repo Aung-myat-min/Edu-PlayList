@@ -19,7 +19,7 @@ def choose_playlist(playlists):
         display_playlist_overview(playlists)
         print_info("Enter playlist ID to select, or 'e' to exit")
 
-        user_input = get_valid_input("Playlist ID (or e): ", 6)
+        user_input = get_valid_input("Playlist ID (or e): ", 1)
 
         # Exit condition
         if user_input.lower() == "e":

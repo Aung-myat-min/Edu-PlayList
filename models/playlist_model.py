@@ -44,40 +44,18 @@ class Playlist:
 
     def __str__(self):
         """Return a clean, labeled string for console output with songs in table format."""
-        # note_str = self.playlist_note if self.playlist_note else "None"
-        #
-        # print(f"PlaylistId: {self.playlist_id}")
-        # print(f"Name: {self.playlist_name}")
-        # print(f"Note: {note_str}")
-        # print("Songs:")
-        #
-        # if not self.added_songs:
-        #     from utils.console_utils import print_warning
-        #     print_warning("No songs in this playlist.")
-        # else:
-        #     # Convert Song objects to dicts for table
-        #     table_data = [song.to_dict() for song in self.added_songs]
-        #     # Only keep relevant fields
-        #     for song in table_data:
-        #         song.pop("extra_field_if_any", None)  # optional cleanup
-        #
-        #     print_table(table_data, headers=["ID", "Name", "Singer", "Genre"])
         return "Dont' use normal print for this object. Instead use display method."
 
     def display(self):
         """Print playlist details in console with table."""
-        from utils.console_utils import print_table, print_warning
-
+        from controllers.playlist_display_controller import display_playlist_songs
+        
         print(f"PlaylistId: {self.playlist_id}")
         print(f"Name: {self.playlist_name}")
         print(f"Note: {self.playlist_note if self.playlist_note else 'None'}")
         print("Songs:")
 
-        if not self.added_songs:
-            print_warning("No songs in this playlist.")
-        else:
-            table_data = [song.to_dict() for song in self.added_songs]
-            print_table(table_data, headers=["ID", "Name", "Singer", "Genre"])
+        display_playlist_songs(self)
 
     # ---------------- Serialisation ----------------
     def to_dict(self):
