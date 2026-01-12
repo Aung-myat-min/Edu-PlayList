@@ -39,9 +39,9 @@ class Song:
         return (f"SongId: {self.song_id},\nName: {self.song_name},\n"
                 f"Singer: {self.singer_name},\nGenre: {self.genre_name}")
 
-    # ---------------- Serialization ----------------
+    # ---------------- Serialisation ----------------
     def to_dict(self):
-        """Convert object to dictionary for JSON serialization."""
+        """Convert object to dictionary for JSON Serialisation."""
         return {
             "song_id": self.song_id,
             "song_name": self.song_name,

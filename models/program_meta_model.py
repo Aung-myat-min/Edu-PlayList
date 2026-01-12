@@ -37,7 +37,7 @@ class ProgramMeta:
         """Return a copy of the playlists list."""
         return self.playlists.copy()
 
-    # ---------------- Serialization ----------------
+    # ---------------- Serialisation ----------------
     def to_dict(self):
         """Convert entire program state to dictionary."""
         return {

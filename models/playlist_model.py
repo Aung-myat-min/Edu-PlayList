@@ -63,9 +63,9 @@ class Playlist:
                 f"Note: {note_str}\n"
                 f"Songs:\n{songs_table}")
 
-    # ---------------- Serialization ----------------
+    # ---------------- Serialisation ----------------
     def to_dict(self):
-        """Convert object to dictionary for JSON serialization."""
+        """Convert object to dictionary for JSON Serialisation."""
         return {
             "playlist_id": self.playlist_id,
             "playlist_name": self.playlist_name,
