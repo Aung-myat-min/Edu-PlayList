@@ -1,10 +1,13 @@
 import os
 import json
+from settings import DATA_FILE_PATH
 
 # Path to the data folder and file
-DATA_FOLDER = ".data"
-DATA_FILE = "program_data.json"
-DATA_PATH = os.path.join(DATA_FOLDER, DATA_FILE)
+# DATA_FOLDER = ".data"
+# DATA_FILE = "program_data.json"
+# DATA_PATH = os.path.join(DATA_FOLDER, DATA_FILE)
+DATA_PATH = DATA_FILE_PATH
+DATA_FOLDER = os.path.dirname(DATA_PATH)
 
 
 def ensure_file_exists():

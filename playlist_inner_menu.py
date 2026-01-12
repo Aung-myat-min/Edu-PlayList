@@ -6,7 +6,8 @@ from controllers.playlist_inner_controller import (
     edit_song_in_playlist,
     delete_song_from_playlist,
     shuffle_playlist_songs,
-    sort_playlist_songs_asc
+    sort_playlist_songs_asc,
+    edit_playlist_name
 )
 
 def playlist_inner_loop(playlist, program_state):
@@ -35,6 +36,9 @@ def playlist_inner_loop(playlist, program_state):
 
             case 6:
                 sort_playlist_songs_asc(playlist)
+
+            case 7:
+                edit_playlist_name(playlist)
 
             case 0:
                 print("⬅️ Returning to Playlist Menu...")

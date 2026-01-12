@@ -67,3 +67,8 @@ def sort_playlist_songs_asc(playlist):
     playlist.added_songs.sort(key=lambda s: s.song_name.lower())
     print_success("Songs sorted A → Z.")
     display_playlist_songs(playlist)
+
+def edit_playlist_name(playlist):
+    new_name = get_valid_input("Enter new playlist name: ", default=playlist.playlist_name)
+    playlist.playlist_name = new_name
+    print_success(f"Playlist renamed to '{new_name}'.")
