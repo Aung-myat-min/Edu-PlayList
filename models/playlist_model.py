@@ -1,6 +1,5 @@
 import re
 
-from models.song_model import Song
 from settings import PLAYLIST_ID_PREFIX
 from utils.console_utils import print_table
 
@@ -16,7 +15,8 @@ class Playlist:
             ValueError: If validation fails.
             TypeError: If added_songs is not a list of Song objects.
         """
-        if not re.fullmatch(rf"{PLAYLIST_ID_PREFIX}-\d{3}", playlist_id):
+        pattern = rf"^{PLAYLIST_ID_PREFIX}-\d{{3}}$"
+        if not re.fullmatch(pattern, playlist_id):
             raise ValueError(f"playlist_id must follow the pattern {PLAYLIST_ID_PREFIX}-000")
 
         if len(playlist_name) < 3:
@@ -77,6 +77,7 @@ class Playlist:
 
     @classmethod
     def from_dict(cls, data):
+        from models.song_model import Song
         """Create a Playlist object from a dictionary."""
         songs = [Song.from_dict(s) for s in data.get("added_songs", [])]
         return cls(

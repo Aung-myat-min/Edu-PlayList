@@ -11,7 +11,8 @@ class Song:
         Raises:
             ValueError: If validation fails.
         """
-        if not re.fullmatch(rf"{SONG_ID_PREFIX}-\d{3}", song_id):
+        pattern = rf"^{SONG_ID_PREFIX}-\d{{3}}$"
+        if not re.fullmatch(pattern, song_id):
             raise ValueError(f"song_id must follow the pattern {SONG_ID_PREFIX}-000")
 
         if len(song_name) < 3:

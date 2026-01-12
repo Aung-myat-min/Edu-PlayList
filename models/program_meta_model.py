@@ -1,4 +1,3 @@
-from models.playlist_model import Playlist
 from settings import SONG_ID_PREFIX, PLAYLIST_ID_PREFIX
 
 
@@ -48,6 +47,7 @@ class ProgramMeta:
 
     @classmethod
     def from_dict(cls, data):
+        from models.playlist_model import Playlist
         playlists = [Playlist.from_dict(pl) for pl in data.get("playlists", [])]
         return cls(
             latest_song_id=data.get("latest_song_id", 0),
