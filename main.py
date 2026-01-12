@@ -1,16 +1,34 @@
-# This is a sample Python script.
+from controllers.welcome_controller import WelcomeController
+from utils.menu_wrapper import run_menu
+from views.welcome_view import WELCOME_MENU
+from models.login_state import LoginState
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+def main():
+    welcome_ctrl = WelcomeController()
+    login_state = None
+    tries_left = welcome_ctrl.login_ctrl.attempts_left
 
+    while True:
+        extra_info = None
+        if login_state == LoginState.FAIL:
+            extra_info = f" ❌ Login failed! Tries left: {tries_left}"
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+        # Show welcome menu and get choice
+        choice = run_menu(WELCOME_MENU, extra_info)
+        login_state = welcome_ctrl.handle_input(choice)
 
+        # Handle login result
+        if login_state == LoginState.SUCCESS:
+            print("🎉 Login successful! You can continue...")
+            break
+        elif login_state == login_state.EXIT and tries_left > 1:
+            print("Exiting program...")
+            break
+        elif login_state == LoginState.EXIT:
+            print("⏹ Too many failed attempts. Exiting program...")
+            break
+        # If login fails but attempts remain, loop continues
+        tries_left = welcome_ctrl.login_ctrl.attempts_left
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+if __name__ == "__main__":
+    main()
