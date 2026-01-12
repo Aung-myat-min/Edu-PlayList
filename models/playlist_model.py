@@ -1,4 +1,5 @@
 import re
+from settings import PLAYLIST_ID_PREFIX
 
 
 class Playlist:
@@ -12,8 +13,8 @@ class Playlist:
             ValueError: If validation fails.
             TypeError: If added_songs is not a list of Song objects.
         """
-        if not re.fullmatch(r"Pl-\d{3}", playlist_id):
-            raise ValueError("playlist_id must follow the pattern Pl-000")
+        if not re.fullmatch(rf"{PLAYLIST_ID_PREFIX}-\d{3}", playlist_id):
+            raise ValueError(f"playlist_id must follow the pattern {PLAYLIST_ID_PREFIX}-000")
 
         if len(playlist_name) < 3:
             raise ValueError("playlist_name must be at least 3 characters long")

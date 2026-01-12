@@ -1,4 +1,5 @@
 import re
+from settings import SONG_ID_PREFIX
 
 class Song:
     """Represents a song."""
@@ -10,8 +11,8 @@ class Song:
         Raises:
             ValueError: If validation fails.
         """
-        if not re.fullmatch(r"S-\d{3}", song_id):
-            raise ValueError("song_id must follow the pattern S-000")
+        if not re.fullmatch(rf"{SONG_ID_PREFIX}-\d{3}", song_id):
+            raise ValueError(f"song_id must follow the pattern {SONG_ID_PREFIX}-000")
 
         if len(song_name) < 3:
             raise ValueError("song_name must be at least 3 characters long")
