@@ -29,10 +29,10 @@ def choose_a_playlist(playlists):
     playlist = choose_playlist(playlists)
     return playlist
 
-def delete_playlist(playlists):
+def delete_playlist(playlists, program_state):
     playlist_id = choose_playlist(playlists)
     if playlist_id:
-        playlists.delete_playlist(playlist_id)
+        program_state.delete_a_playlist(playlist_id)
         print_success("Playlist deleted.")
 
 def sort_playlists_asc(playlists):

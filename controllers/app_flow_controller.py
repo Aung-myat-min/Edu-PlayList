@@ -107,7 +107,7 @@ def run_app_loop(program_state):
                     print_error(f"Could not create playlist: {e}")
 
             case 4:
-                delete_playlist(playlists)
+                delete_playlist(playlists, program_state)
                 save_program_state(program_state)
 
             case 5:

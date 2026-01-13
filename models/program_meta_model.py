@@ -36,7 +36,7 @@ class ProgramMeta:
         """Return a copy of the playlists list."""
         return self.playlists.copy()
 
-    def delete_playlist(self, playlist_id):
+    def delete_a_playlist(self, playlist_id):
         """Remove a playlist by ID and return True if successful."""
         for i, pl in enumerate(self.playlists):
             if pl.playlist_id == playlist_id:
